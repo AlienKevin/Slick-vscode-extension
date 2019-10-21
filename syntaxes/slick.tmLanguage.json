@@ -1,0 +1,83 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Slick",
+	"patterns": [
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+				"name": "keyword.control.f.slick",
+				"match": "(\\bf\\b)"
+				},
+				{
+				"name": "keyword.control.control.slick",
+				"match": "^\\s*(var|mut|let|if|elif|else|call|while|return|break)\\b"
+				},
+				{
+				"name": "keyword.operator.relational.slick",
+				"match": "(<|>|≤|≥|=|≠)"
+				},
+				{
+				"name": "keyword.operator.arithmetic.slick",
+				"match": "%|\\*|/|-|\\+"
+				},
+				{
+				"name": "keyword.operator.ternary.slick",
+				"match": "(\\?|\\!)"
+				},
+				{
+				"name": "keyword.operator.logical.slick",
+				"match": "(⋏|⋎)"
+				},
+				{
+				"name": "keyword.operator.arrow.slick",
+				"match": "(→)"
+				},
+				{
+				"name": "keyword.operator.concat.slick",
+				"match": "(&)"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+				"name": "string.quoted.single.slick",
+				"begin": "'",
+				"end": "'"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+				"name": "comment.line.slick",
+				"begin": "#",
+				"end": "\n"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+				"name": "constant.numeric",
+				"match": "\\b([-]?(\\d+\\.)?\\d+(e[-]?\\d+)?)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.slk"
+}

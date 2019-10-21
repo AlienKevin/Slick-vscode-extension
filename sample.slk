@@ -1,0 +1,24 @@
+# comment
+call print ('hello ' & 'world')
+var a: 0.3
+var a: 3 ? 3 ! 3
+if (3 < 3) ⋏ (3 ≥ 3)
+    call print f a (a)
+var element·nr: 10
+var callback·function= a → b → c → d
+var callback·function: f reduction element element·nr exit
+    # function details omitted
+    return null
+while element·nr ≥ 0
+    let element·nr: element·nr - 1
+    # fake some variables
+    var reduction: null
+    var array: null
+    var exit: null
+    call (
+        callback·function
+        reduction
+        array
+        element·nr
+        exit
+    )
