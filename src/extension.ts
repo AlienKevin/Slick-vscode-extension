@@ -4,10 +4,10 @@
  * @author Dominique Rau [domi.github@gmail.com](mailto:domi.github@gmail.com)
  * @version 0.0.1
  */
-import onSave from './onSave';
+import onChange from './onChange';
 
 export function activate() {
-    onSave.register();
+    onChange.register();
 }
 
 export function deactivate() {}

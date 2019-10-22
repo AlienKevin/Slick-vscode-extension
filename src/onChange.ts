@@ -7,9 +7,8 @@
 
 import {
 	Disposable,
-	TextDocumentWillSaveEvent,
-	TextEdit,
 	workspace,
+	window,
 } from 'vscode';
 import { calculateTargetTextForAllRules, getCustomEdits, CustomEditType } from './regreplace';
 
@@ -19,8 +18,12 @@ export default {
 		if (subscription) {
 			return;
 		}
-
-		subscription = workspace.onWillSaveTextDocument(listener);
+		// replace any expanded shorthands before any new ones are added
+		listener({
+			document: window.activeTextEditor.document
+		});
+		// listen to content change to replace shorthands
+		subscription = workspace.onDidChangeTextDocument(listener);
 	},
 
 	unregister() {
@@ -42,7 +45,7 @@ export default {
 /**
  * callback listener, we apply small delta changes
  */
-function listener({ document, waitUntil }: TextDocumentWillSaveEvent) {
+function listener({ document }) {
 	const regreplacedText = calculateTargetTextForAllRules(document);
 	if (!regreplacedText || regreplacedText === document.getText()) {
 		return;
@@ -50,15 +53,19 @@ function listener({ document, waitUntil }: TextDocumentWillSaveEvent) {
 
 	// v1 use diff edits
 	const edits = getCustomEdits(document.getText(), regreplacedText);
-	const textEdits = edits.map(e => {
-		switch (e.action) {
-			case CustomEditType.Replace:
-				return new TextEdit(e.range, e.value);
-			case CustomEditType.Insert:
-				return new TextEdit(e.range, e.value);
-			case CustomEditType.Delete:
-				return new TextEdit(e.range, '');
-		}
+	window.activeTextEditor.edit((textEditorEdit) => {
+		edits.forEach(e => {
+			switch (e.action) {
+				case CustomEditType.Replace:
+					textEditorEdit.replace(e.range, e.value);
+					break;
+				case CustomEditType.Insert:
+					textEditorEdit.insert(e.range.start, e.value);
+					break;
+				case CustomEditType.Delete:
+					textEditorEdit.delete(e.range);
+					break;
+			}
+		});
 	});
-	waitUntil(Promise.all(textEdits));
 }
