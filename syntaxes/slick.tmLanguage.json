@@ -47,6 +47,10 @@
 				"match": "(→)"
 				},
 				{
+				"name": "keyword.operator.tilde.slick",
+				"match": "(~)"
+				},
+				{
 				"name": "keyword.operator.concat.slick",
 				"match": "(&)"
 				}
