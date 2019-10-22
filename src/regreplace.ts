@@ -18,6 +18,13 @@ export function calculateTargetTextForAllRules(document: TextDocument): string {
 	try {
 		const commands: ICommand[] = [
             {
+                "name": "auto indent",
+                "match": "\\.slk$",
+                "regexp": "(\\s*(if|elif|else|while).*(\r\n|\n))(\r\n|\n)",
+                "global": true,
+                "replace": "$1    $4"
+            },
+            {
                 "name": "-> to → in Slick",
                 "match": "\\.slk$",
                 "regexp": "(\\->)",
