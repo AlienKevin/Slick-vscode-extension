@@ -9,17 +9,38 @@
     "categories": [
         "Programming Languages"
     ],
+    "main": "./dist/src/extension",
+    "activationEvents": [
+        "*"
+    ],
     "contributes": {
-        "languages": [{
-            "id": "slick",
-            "aliases": ["Slick", "slick"],
-            "extensions": [".slk"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "slick",
-            "scopeName": "source.slk",
-            "path": "./syntaxes/slick.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "slick",
+                "aliases": [
+                    "Slick",
+                    "slick"
+                ],
+                "extensions": [
+                    ".slk"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "slick",
+                "scopeName": "source.slk",
+                "path": "./syntaxes/slick.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^6.0.46",
+        "typescript": "^2.0.6",
+        "vscode": "^1.0.3"
+    },
+    "dependencies": {
+        "diff-match-patch": "^1.0.0"
     }
 }
